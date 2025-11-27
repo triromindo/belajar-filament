@@ -41,4 +41,9 @@ class ListTools extends ListRecords
                 ->modifyQueryUsing(fn(Builder $query) => $query->onlyTrashed()),
         ];
     }
+
+    public function getDefaultActiveTab(): string|int|null
+    {
+        return 'all';
+    }
 }
