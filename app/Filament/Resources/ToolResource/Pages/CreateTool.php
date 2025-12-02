@@ -28,4 +28,9 @@ class CreateTool extends CreateRecord
     //     ]);
     //     return static::getModel()::create($data);
     // }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
