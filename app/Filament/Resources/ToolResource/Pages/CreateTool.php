@@ -8,6 +8,7 @@ use App\Filament\Resources\ToolResource;
 use Filament\Notifications\Notification;
 use App\Filament\Resources\OwnerResource;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Notifications\Actions\Action;
 
 class CreateTool extends CreateRecord
 {
@@ -46,5 +47,24 @@ class CreateTool extends CreateRecord
             ->success()
             ->title('User registered')
             ->body('The user has been created successfully.');
+    }
+
+    protected function beforeCreate(): void
+    {
+        // if (auth()->user()->id == 5) {
+        Notification::make()
+            ->warning()
+            ->title('You don\'t have an active subscription!')
+            ->body('Choose a plan to continue.')
+            ->persistent()
+            ->actions([
+                Action::make('subscribe')
+                    ->button()
+                    ->url(OwnerResource::getUrl('index'), shouldOpenInNewTab: true),
+            ])
+            ->send();
+
+        $this->halt();
+        // }
     }
 }
