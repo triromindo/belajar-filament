@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ToolResource\Pages;
 use Filament\Actions;
 use Illuminate\Database\Eloquent\Model;
 use App\Filament\Resources\ToolResource;
+use Filament\Notifications\Notification;
 use App\Filament\Resources\OwnerResource;
 use Filament\Resources\Pages\CreateRecord;
 
@@ -32,5 +33,18 @@ class CreateTool extends CreateRecord
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
+    }
+
+    // protected function getCreatedNotificationTitle(): ?string
+    // {
+    //     return 'Success membuat tools';
+    // }
+
+    protected function getCreatedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('User registered')
+            ->body('The user has been created successfully.');
     }
 }
