@@ -9,4 +9,11 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTool extends CreateRecord
 {
     protected static string $resource = ToolResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['name'] = 'Renamed Tool';
+
+        return $data;
+    }
 }
