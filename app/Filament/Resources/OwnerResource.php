@@ -2,22 +2,27 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OwnerResource\Pages;
-use App\Filament\Resources\OwnerResource\RelationManagers;
-use App\Models\Owner;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Owner;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Support\Htmlable;
+use App\Filament\Resources\OwnerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\OwnerResource\RelationManagers;
 
 class OwnerResource extends Resource
 {
     protected static ?string $model = Owner::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $recordTitleAttribute = 'name';
+
 
     public static function form(Form $form): Form
     {
@@ -83,5 +88,10 @@ class OwnerResource extends Resource
             'create' => Pages\CreateOwner::route('/create'),
             'edit' => Pages\EditOwner::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return $record->name;
     }
 }

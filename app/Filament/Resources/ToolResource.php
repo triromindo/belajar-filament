@@ -2,22 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ToolResource\Pages;
-use App\Filament\Resources\ToolResource\RelationManagers;
-use App\Models\Tool;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Tool;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Support\Htmlable;
+use App\Filament\Resources\ToolResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ToolResource\RelationManagers;
 
 class ToolResource extends Resource
 {
     protected static ?string $model = Tool::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
@@ -78,5 +81,10 @@ class ToolResource extends Resource
             'create' => Pages\CreateTool::route('/create'),
             'edit' => Pages\EditTool::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return $record->name;
     }
 }
