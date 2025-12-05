@@ -8,6 +8,8 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class PatientTypeOverview extends BaseWidget
 {
+    
+    protected static ?int $sort = 2;
     protected function getStats(): array
     {
         return [

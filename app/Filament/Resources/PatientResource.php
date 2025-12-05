@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\PatientResource\Widgets\CustomerCountResourceOverview;
+use App\Filament\Resources\PatientResource\Widgets\PatientCountByTypeChart;
+use App\Filament\Resources\PatientResource\Widgets\PatientCountResourceOverview;
+use App\Filament\Resources\PatientResource\Widgets\TreatmentCountPerPatient;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Patient;
@@ -169,11 +173,20 @@ class PatientResource extends Resource
     {
         return [
             Action::make('edit')
-            ->button()
+                ->button()
                 ->url(static::getUrl('edit', ['record' => $record]), true),
             Action::make('details')
-            ->button()
+                ->button()
                 ->url(static::getUrl('view', ['record' => $record])),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            PatientCountResourceOverview::class,
+            PatientCountByTypeChart::class,
+            TreatmentCountPerPatient::class,
         ];
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\PatientResource\Pages;
 
 use App\Filament\Resources\PatientResource;
+use App\Filament\Resources\PatientResource\Widgets\PatientCountByTypeChart;
+use App\Filament\Resources\PatientResource\Widgets\PatientCountResourceOverview;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +16,14 @@ class ListPatients extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            PatientCountResourceOverview::class,
+            PatientCountByTypeChart::class,
         ];
     }
 }
