@@ -13,16 +13,13 @@ use function PHPUnit\Framework\returnArgument;
 
 class Settings extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
     protected static string $view = 'filament.pages.settings';
 
-    protected static ?string $slug = 'pengaturan';
+    protected static ?string $navigationLabel = 'Pengaturan';
+    protected static ?string $navigationGroup = 'Settings';
 
-    protected ?string $heading = 'Pengaturan';
-    protected ?string $subheading = 'Page Pengaturan';
 
-    protected static ?string $title = 'pengaturan';
 
     public static function canAccess(): bool
     {
@@ -50,6 +47,11 @@ class Settings extends Page
     }
 
     public function getHeaderWidgetsColumns(): array|int|string
+    {
+        return 3;
+    }
+
+    public static function getNavigationBadge(): ?string
     {
         return 3;
     }
