@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Http\Middleware\OnlyAdmin;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -51,6 +52,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                OnlyAdmin::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
