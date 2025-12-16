@@ -25,4 +25,9 @@ class Team extends Model
     {
         return $this->hasMany(Patient::class);
     }
+
+    public function tools(): HasMany
+    {
+        return $this->hasMany(Tool::class);
+    }
 }
